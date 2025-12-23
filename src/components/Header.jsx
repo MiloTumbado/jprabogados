@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { NavLink as RouterNavLink } from 'react-router-dom';
+import Logo from './Logo';
 
 const HeaderContainer = styled(motion.header)`
   display: flex;
@@ -13,17 +14,6 @@ const HeaderContainer = styled(motion.header)`
   position: sticky;
   top: 0;
   z-index: 10;
-`;
-
-const LogoLink = styled(RouterNavLink)`
-  text-decoration: none;
-`;
-
-const Logo = styled.h1`
-  font-family: ${({ theme }) => theme.fonts.primary};
-  font-size: 1.8rem;
-  color: ${({ theme }) => theme.colors.navy};
-  margin: 0;
 `;
 
 const Nav = styled.nav`
@@ -67,9 +57,7 @@ const Header = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <LogoLink to="/">
-        <Logo>JPR Abogados</Logo>
-      </LogoLink>
+      <Logo />
       <Nav>
         <NavLink to="/quienes-somos">Quiénes somos</NavLink>
         <NavLink to="/servicios">Servicios</NavLink>

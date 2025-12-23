@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import HeroBackground from '../assets/hero-background.jpg';
 
 const HeroContainer = styled.section`
   display: flex;
@@ -11,21 +12,26 @@ const HeroContainer = styled.section`
   height: 90vh;
   text-align: center;
   padding: 0 ${({ theme }) => theme.spacing.xxl};
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${HeroBackground});
+  background-size: cover;
+  background-position: center;
+  position: relative;
 `;
 
 const Title = styled(motion.h1)`
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: 4rem;
-  color: ${({ theme }) => theme.colors.navy};
+  color: ${({ theme }) => theme.colors.white};
   margin-bottom: ${({ theme }) => theme.spacing.md};
+  z-index: 1;
 `;
 
 const Subtitle = styled(motion.p)`
   font-family: ${({ theme }) => theme.fonts.secondary};
   font-size: 1.5rem;
-  color: ${({ theme }) => theme.colors.slate};
+  color: ${({ theme }) => theme.colors['lightest-slate']};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
+  z-index: 1;
 `;
 
 const CTAButton = styled(motion(Link))`
@@ -38,10 +44,11 @@ const CTAButton = styled(motion(Link))`
   padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.lg}`};
   text-decoration: none;
   transition: all 0.3s ease;
+  z-index: 1;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gold};
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.navy};
   }
 `;
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import QuienesSomosImage from '../assets/quienes-somos-image.jpg';
 
 const SectionContainer = styled.section`
   padding: ${({ theme }) => `${theme.spacing.xxl} ${theme.spacing.xxl}`};
@@ -16,10 +17,26 @@ const Title = styled(motion.h2)`
   margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
-const Content = styled(motion.div)`
-  max-w: 800px;
+const ContentGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme.spacing.xxl};
+  align-items: center;
+  max-w: 1200px;
   margin: 0 auto;
+`;
+
+const TextContent = styled(motion.div)`
   text-align: justify;
+`;
+
+const ImageContent = styled(motion.div)`
+  width: 100%;
+  height: 400px;
+  background-image: url(${QuienesSomosImage});
+  background-size: cover;
+  background-position: center;
+  border-radius: ${({ theme }) => theme.borderRadius};
 `;
 
 const Text = styled.p`
@@ -53,24 +70,31 @@ const QuienesSomosPage = () => {
       >
         Quiénes Somos
       </Title>
-      <Content
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-      >
-        <Text>
-          Está compuesta por abogados que tienen amplia experiencia trabajando como asesores laborales externos en bufetes de abogados de reconocido prestigio internacional y han desempeñado posiciones como abogados internos de Relaciones Laborales en las áreas Jurídica y de Recursos Humanos en importantes compañías multinacionales.
-        </Text>
-        <Text>
-          El despacho provee servicios legales en temas laborales a sus clientes de manera personalizada:
-        </Text>
-        <StyledList>
-          <StyledListItem>Constituyéndose sus abogados en asesores y socios de negocios en sus actividades del día a día;</StyledListItem>
-          <StyledListItem>Brindando soluciones a la medida según las necesidades específicas de cada caso;</StyledListItem>
-          <StyledListItem>Un alto grado de análisis para sus asuntos y;</StyledListItem>
-          <StyledListItem>Orientados a resultados.</StyledListItem>
-        </StyledList>
-      </Content>
+      <ContentGrid>
+        <TextContent
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+        >
+          <Text>
+            Está compuesta por abogados que tienen amplia experiencia trabajando como asesores laborales externos en bufetes de abogados de reconocido prestigio internacional y han desempeñado posiciones como abogados internos de Relaciones Laborales en las áreas Jurídica y de Recursos Humanos en importantes compañías multinacionales.
+          </Text>
+          <Text>
+            El despacho provee servicios legales en temas laborales a sus clientes de manera personalizada:
+          </Text>
+          <StyledList>
+            <StyledListItem>Constituyéndose sus abogados en asesores y socios de negocios en sus actividades del día a día;</StyledListItem>
+            <StyledListItem>Brindando soluciones a la medida según las necesidades específicas de cada caso;</StyledListItem>
+            <StyledListItem>Un alto grado de análisis para sus asuntos y;</StyledListItem>
+            <StyledListItem>Orientados a resultados.</StyledListItem>
+          </StyledList>
+        </TextContent>
+        <ImageContent
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+        />
+      </ContentGrid>
     </SectionContainer>
   );
 };
