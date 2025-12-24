@@ -18,10 +18,16 @@ const HeroSection = styled.section`
   padding: 0 20px;
   
   /* Mobile adjustments */
+  /* Mobile adjustments */
   @media (max-width: 768px) {
     min-height: 100dvh; /* Use dynamic viewport height for mobile browsers */
-    background-position: top center; /* Focus on top part of image (faces/heads) */
+    background-size: contain; /* Show the full image ("zoom out") */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #050505; /* Black fill for the letterboxing */
     padding: 0 15px;
+    
+    /* Adjust text position slightly if needed or scaling */
   }
 `;
 

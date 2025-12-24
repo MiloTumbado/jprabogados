@@ -90,7 +90,7 @@ const Team = () => {
         </p>
         <TeamGrid>
           <MemberCard>
-            <MemberImage />
+            {/* <MemberImage /> Removed as per client request */}
             <MemberName>Lic. Jorge Luis Pérez Rodriguez</MemberName>
             <MemberRole>Director</MemberRole>
             <MemberBio>
