@@ -1,12 +1,12 @@
 export const theme = {
   colors: {
-    navy: '#0A192F',
-    lightNavy: '#112240',
-    lightestNavy: '#233554',
-    slate: '#8892b0',
-    lightSlate: '#a8b2d1',
-    lightestSlate: '#ccd6f6',
-    white: '#e6f1ff',
+    navy: '#050505', // Almost pure black
+    lightNavy: '#121212', // Material Dark
+    lightestNavy: '#252525', // Lighter black
+    slate: '#a0a0a0', // Neutral grey
+    lightSlate: '#d0d0d0', // Light grey
+    lightestSlate: '#ffffff', // White
+    white: '#ffffff',
     gold: '#C5A059', // Elegant gold
     goldTint: '#E5C079',
   },

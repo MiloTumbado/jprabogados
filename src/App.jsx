@@ -1,12 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import GlobalStyle from './GlobalStyle';
 import styled from 'styled-components';
 import logo from './assets/logo.png';
 
-// Placeholder Components (until fully implemented)
+// Importamos los componentes
+import Hero from './components/Hero';
+import About from './components/AboutSection';
+import Services from './components/Services';
+import ContactForm from './components/ContactSection';
+import Team from './components/Team';
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,52 +23,47 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
-  background-color: ${({ theme }) => theme.colors.navy};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.lightNavy};
+  padding: 20px 40px;
+  background-color: rgba(5, 5, 5, 0.95); /* Nuevo color negro formal */
+  position: fixed; /* Header fijo */
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
 `;
 
 const Logo = styled.img`
-  height: 50px;
+  height: 45px;
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: ${({ theme }) => theme.spacing.lg};
+  gap: 30px;
+  
+  @media (max-width: 768px) {
+    display: none; /* Aquí podrías implementar un menú hamburguesa */
+  }
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   color: ${({ theme }) => theme.colors.lightestSlate};
   font-size: ${({ theme }) => theme.fontSizes.sm};
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
   &:hover {
     color: ${({ theme }) => theme.colors.gold};
   }
 `;
 
-const Main = styled.main`
-  flex: 1;
-  padding: ${({ theme }) => theme.spacing.xl};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-`;
-
 const Footer = styled.footer`
-  padding: ${({ theme }) => theme.spacing.lg};
+  padding: 30px;
   text-align: center;
   color: ${({ theme }) => theme.colors.slate};
-  background-color: ${({ theme }) => theme.colors.lightNavy};
+  background-color: ${({ theme }) => theme.colors.navy};
   font-size: ${({ theme }) => theme.fontSizes.xs};
+  border-top: 1px solid ${({ theme }) => theme.colors.lightNavy};
 `;
-
-const Home = () => (
-  <Main>
-    <h1>JPR Abogados</h1>
-    <p>Compromiso, Excelencia y Resultados.</p>
-  </Main>
-);
 
 function App() {
   return (
@@ -71,19 +72,32 @@ function App() {
       <Router>
         <PageContainer>
           <Header>
-            <Logo src={logo} alt="JPR Abogados Logo" />
+            <Link to="/">
+              <Logo src={logo} alt="JPR Abogados" />
+            </Link>
             <Nav>
-              <NavLink href="/">Inicio</NavLink>
-              <NavLink href="#">Firma</NavLink>
-              <NavLink href="#">Servicios</NavLink>
-              <NavLink href="#">Contacto</NavLink>
+              <NavLink to="/">Inicio</NavLink>
+              <NavLink to="/quienes-somos">La Firma</NavLink>
+              <NavLink to="/servicios">Servicios</NavLink>
+              <NavLink to="/equipo">Nuestro Equipo</NavLink>
+              <NavLink to="/contacto">Contacto</NavLink>
             </Nav>
           </Header>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
+
+          {/* Main content con padding top para compensar el header fijo */}
+          <main style={{ paddingTop: '85px', flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<Hero />} />
+              <Route path="/quienes-somos" element={<About />} />
+              <Route path="/servicios" element={<Services />} />
+              <Route path="/equipo" element={<Team />} />
+              <Route path="/contacto" element={<ContactForm />} />
+            </Routes>
+          </main>
+
           <Footer>
-            &copy; {new Date().getFullYear()} JPR Abogados. Todos los derechos reservados.
+            <p>&copy; {new Date().getFullYear()} JPR Abogados. Todos los derechos reservados.</p>
+            <p>Especialistas en Derecho Laboral y Seguridad Social</p>
           </Footer>
         </PageContainer>
       </Router>
