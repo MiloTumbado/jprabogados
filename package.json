@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "framer-motion": "^12.23.26",
     "nodemailer": "^7.0.12",
     "pg": "^8.16.3",

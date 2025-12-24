@@ -1,16 +1,58 @@
-# React + Vite
+# JPR Abogados - Corporate Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the official website for **JPR Abogados**, a boutique legal firm based in Monterrey, Mexico. The site is a modern Single Page Application (SPA) built with React, designed to reflect a "Clean & Corporate" aesthetic using a Navy Blue and Gold color palette.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   **Modern Design:** Fully responsive layout with a premium feel using Styled Components.
+-   **Animations:** Smooth entry animations using `framer-motion`.
+-   **Contact Form:** Functional contact form integrated with a serverless backend.
+-   **Backend:** Netlify Functions handle form submissions, saving data to a Neon (PostgreSQL) database and sending email notifications via Nodemailer.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+-   **Frontend:** React (Vite), Styled Components, Framer Motion.
+-   **Backend:** Netlify Functions (Node.js).
+-   **Database:** Neon Serverless PostgreSQL.
+-   **Email:** Nodemailer (SMTP).
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-   `src/components`: Reusable UI components (Buttons, Input fields, Layout wrappers).
+-   `src/sections`: Main page sections (Hero, About, Services, Philosophy, Contact).
+-   `src/styles`: Global styles and theme definitions (`theme.js`).
+-   `netlify/functions`: Serverless functions for backend logic.
+
+## Setup & Installation
+
+1.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
+
+2.  **Run Development Server:**
+    ```bash
+    npm run dev
+    ```
+
+3.  **Build for Production:**
+    ```bash
+    npm run build
+    ```
+
+## Environment Variables
+
+To enable the contact form functionality, you must configure the following environment variables in your deployment environment (e.g., Netlify Dashboard):
+
+| Variable | Description |
+| :--- | :--- |
+| `DATABASE_URL` | Connection string for your Neon PostgreSQL database. |
+| `SMTP_HOST` | Hostname of your SMTP email provider (e.g., `smtp.gmail.com`). |
+| `SMTP_PORT` | Port for the SMTP server (usually `587` or `465`). |
+| `SMTP_USER` | Username/Email for the SMTP account. |
+| `SMTP_PASS` | Password or App Password for the SMTP account. |
+| `NOTIFICATION_EMAIL`| The email address that will receive the contact form submissions. |
+
+## Database Setup
+
+Run the SQL script located in `database.sql` to create the necessary table for storing contact submissions.
