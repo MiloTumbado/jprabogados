@@ -58,6 +58,52 @@ const Container = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const MobileGrid = styled.div`
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const MobileItem = styled.div`
+  background-color: white;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 `;
 
 const DockItem = ({ src, mouseX }) => {
@@ -107,6 +153,8 @@ const ClientsDock = () => {
     return (
         <div style={{ textAlign: 'center' }}>
             <h3 style={{ color: '#C5A059', marginBottom: '30px' }}>Nuestros Clientes</h3>
+
+            {/* Desktop Dock View */}
             <Container
                 onMouseMove={(e) => mouseX.set(e.pageX)}
                 onMouseLeave={() => mouseX.set(Infinity)}
@@ -115,6 +163,15 @@ const ClientsDock = () => {
                     <DockItem key={index} src={logo} mouseX={mouseX} />
                 ))}
             </Container>
+
+            {/* Mobile Grid View */}
+            <MobileGrid>
+                {clientLogos.map((logo, index) => (
+                    <MobileItem key={index}>
+                        <img src={logo} alt={`Client ${index + 1}`} />
+                    </MobileItem>
+                ))}
+            </MobileGrid>
         </div>
     );
 };

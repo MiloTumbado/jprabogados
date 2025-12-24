@@ -16,6 +16,13 @@ const HeroSection = styled.section`
   align-items: center;
   text-align: center;
   padding: 0 20px;
+  
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    min-height: 100dvh; /* Use dynamic viewport height for mobile browsers */
+    background-position: top center; /* Focus on top part of image (faces/heads) */
+    padding: 0 15px;
+  }
 `;
 
 const Title = styled.h1`
@@ -23,6 +30,10 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.colors.gold};
   margin-bottom: ${({ theme }) => theme.spacing.md};
   max-width: 800px;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem; /* Smaller font on mobile */
+  }
 `;
 
 const Subtitle = styled.p`
@@ -30,6 +41,11 @@ const Subtitle = styled.p`
   color: ${({ theme }) => theme.colors.lightestSlate};
   max-width: 600px;
   margin-bottom: ${({ theme }) => theme.spacing.xl};
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    max-width: 100%;
+  }
 `;
 
 const CTAButton = styled(Link)`

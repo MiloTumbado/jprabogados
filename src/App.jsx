@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
@@ -30,10 +30,17 @@ const Header = styled.header`
   top: 0;
   z-index: 100;
   backdrop-filter: blur(10px);
+  
+  @media (max-width: 768px) {
+    padding: 15px 20px;
+  }
 `;
 
 const Logo = styled.img`
   height: 45px;
+  @media (max-width: 768px) {
+    height: 35px;
+  }
 `;
 
 const Nav = styled.nav`
@@ -41,7 +48,75 @@ const Nav = styled.nav`
   gap: 30px;
   
   @media (max-width: 768px) {
-    display: none; /* Aquí podrías implementar un menú hamburguesa */
+    display: none;
+  }
+`;
+
+const HamburgerBtn = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 24px;
+  position: relative;
+  z-index: 102; /* Higher than header and menu */
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: ${({ theme, isOpen }) => isOpen ? theme.colors.gold : theme.colors.lightestSlate};
+    transition: all 0.3s ease-in-out;
+    transform-origin: 1px;
+
+    /* Hamburger Animation Logic */
+    &:first-child {
+      transform: ${({ isOpen }) => isOpen ? 'rotate(45deg)' : 'rotate(0)'};
+    }
+
+    &:nth-child(2) {
+      opacity: ${({ isOpen }) => isOpen ? '0' : '1'};
+      transform: ${({ isOpen }) => isOpen ? 'translateX(20px)' : 'translateX(0)'};
+    }
+
+    &:nth-child(3) {
+      transform: ${({ isOpen }) => isOpen ? 'rotate(-45deg)' : 'rotate(0)'};
+    }
+  }
+`;
+
+const MobileMenu = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(5, 5, 5, 0.98);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  transform: ${({ isOpen }) => isOpen ? 'translateX(0)' : 'translateX(100%)'};
+  transition: transform 0.3s ease-in-out;
+  z-index: 101; /* Behind hamburger, above everything else */
+`;
+
+const MobileNavLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.lightestSlate};
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  
+  &:hover {
+    color: ${({ theme }) => theme.colors.gold};
   }
 `;
 
@@ -66,15 +141,22 @@ const Footer = styled.footer`
 `;
 
 function App() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMenu = () => setIsMobileMenuOpen(false);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
         <PageContainer>
           <Header>
-            <Link to="/">
+            <Link to="/" onClick={closeMenu}>
               <Logo src={logo} alt="JPR Abogados" />
             </Link>
+
+            {/* Desktop Nav */}
             <Nav>
               <NavLink to="/">Inicio</NavLink>
               <NavLink to="/quienes-somos">La Firma</NavLink>
@@ -82,6 +164,22 @@ function App() {
               <NavLink to="/equipo">Nuestro Equipo</NavLink>
               <NavLink to="/contacto">Contacto</NavLink>
             </Nav>
+
+            {/* Mobile Nav Button */}
+            <HamburgerBtn isOpen={isMobileMenuOpen} onClick={toggleMenu} aria-label="Menu">
+              <span />
+              <span />
+              <span />
+            </HamburgerBtn>
+
+            {/* Mobile Menu Overlay */}
+            <MobileMenu isOpen={isMobileMenuOpen}>
+              <MobileNavLink to="/" onClick={closeMenu}>Inicio</MobileNavLink>
+              <MobileNavLink to="/quienes-somos" onClick={closeMenu}>La Firma</MobileNavLink>
+              <MobileNavLink to="/servicios" onClick={closeMenu}>Servicios</MobileNavLink>
+              <MobileNavLink to="/equipo" onClick={closeMenu}>Nuestro Equipo</MobileNavLink>
+              <MobileNavLink to="/contacto" onClick={closeMenu}>Contacto</MobileNavLink>
+            </MobileMenu>
           </Header>
 
           {/* Main content con padding top para compensar el header fijo */}
