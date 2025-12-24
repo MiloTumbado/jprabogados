@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import logoImage from '../assets/logo.png'; // Updated import
 
 const LogoContainer = styled(Link)`
   display: flex;
@@ -9,9 +10,9 @@ const LogoContainer = styled(Link)`
   color: ${({ theme }) => theme.colors.navy};
 `;
 
-const SvgLogo = styled.svg`
-  width: 40px;
-  height: 40px;
+const ImgLogo = styled.img`
+  height: 50px; /* Adjust height as needed */
+  width: auto;
   margin-right: 10px;
 `;
 
@@ -24,12 +25,7 @@ const LogoText = styled.span`
 const Logo = () => {
   return (
     <LogoContainer to="/">
-      <SvgLogo viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100" height="100" fill="#0A192F"/>
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="#FFD700" fontSize="40" fontFamily="Playfair Display">
-          JPR
-        </text>
-      </SvgLogo>
+      <ImgLogo src={logoImage} alt="JPR Abogados Logo" />
       <LogoText>JPR Abogados</LogoText>
     </LogoContainer>
   );
