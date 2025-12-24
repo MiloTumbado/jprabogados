@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/hero-background.jpg';
+import heroMobileBg from '../assets/hero-mobile.png';
 
 const HeroSection = styled.section`
   height: 90vh;
@@ -18,16 +19,15 @@ const HeroSection = styled.section`
   padding: 0 20px;
   
   /* Mobile adjustments */
-  /* Mobile adjustments */
   @media (max-width: 768px) {
-    min-height: 100dvh; /* Use dynamic viewport height for mobile browsers */
-    background-size: contain; /* Show the full image ("zoom out") */
-    background-repeat: no-repeat;
+    min-height: 100dvh;
+    background-image: linear-gradient(
+      rgba(5, 5, 5, 0.85), 
+      rgba(5, 5, 5, 0.7)
+    ), url(${heroMobileBg});
+    background-size: cover;
     background-position: center;
-    background-color: #050505; /* Black fill for the letterboxing */
     padding: 0 15px;
-    
-    /* Adjust text position slightly if needed or scaling */
   }
 `;
 
